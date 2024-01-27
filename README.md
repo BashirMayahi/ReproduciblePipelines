@@ -20,9 +20,6 @@ Prerequisites Before begin, should make sure meet the following requirements.
 
     GitHub repository.
 
-```{=html}
-<!-- -->
-```
 -   **Navigate to the Repository Directory**
 
     Change your current directory to the cloned repository:
@@ -42,3 +39,13 @@ Prerequisites Before begin, should make sure meet the following requirements.
 -   **Output**
 
     After the Docker container has finished processing, check the contents of the shared_folder on your host machine for the output: ls /path/to/shared_folder This command lists the files in the shared folder, where you should find the output of the pipeline.
+
+### **Additional Notes**
+
+-   **Docker Container Removal**: The **`--rm`** flag in the **`docker run`** command automatically removes the container once it stops. This is useful for cleanup and ensuring no unnecessary containers are left running or in a stopped state.
+
+-   **Volume Mounting**: The **`-v`** flag in the **`docker run`** command mounts a volume, which is crucial for data persistence and transfer between the host and the container. Ensure the path you provide is correct.
+
+-   **Container Naming**: The **`--name my_container`** option names your container for easier reference. You can change **`my_container`** to any name you prefer.
+
+-   **Read-Write Access**: The **`:rw`** at the end of the volume path ensures that the mounted volume has read-write access, allowing modifications from both the container and the host.
