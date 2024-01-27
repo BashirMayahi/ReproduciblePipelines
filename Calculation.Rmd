@@ -1,0 +1,68 @@
+---
+title: "Calculation"
+author: "Bashir Mayahi"
+date: "2024-01-27"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(caret)
+```
+ 
+```{r}
+# Assuming your data is in a CSV file named 'data.csv'
+data <- read_csv("data/insurance.csv", show_col_types = FALSE)
+
+
+#summary
+summary(data)
+```
+```{r}
+# Plot charges vs BMI colored by Smoking Status
+ggplot(data, aes(x = bmi, y = charges, color = smoker)) +
+  geom_point() +
+  labs(title = "Charges vs BMI colored by Smoking Status",
+       x = "BMI",
+       y = "Charges")
+
+```
+
+
+```{r}
+# Data Preparation
+set.seed(123) # for reproducibility
+splitIndex <- createDataPartition(data$charges, p = 0.8, list = FALSE)
+trainData <- data[splitIndex,]
+testData <- data[-splitIndex,]
+
+```
+
+
+
+```{r}
+# Train Model with Cross-Validation
+# Define training control
+train.control <- trainControl(method = "cv", number = 10)
+
+# Train the model
+model <- train(charges ~ ., data = trainData, method = "lm", trControl = train.control)
+
+# Print the model results
+print(model)
+
+```
+```{r}
+predictions <- predict(model, testData)
+results <- data.frame(Actual = testData$charges, Predicted = predictions)
+head(results)
+
+# Calculate performance metrics
+test.error <- postResample(pred = predictions, obs = testData$charges)
+test.error
+
+```
+
