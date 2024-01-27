@@ -15,12 +15,14 @@ library(caret)
  
 ```{r}
 # Assuming your data is in a CSV file named 'data.csv'
-data <- read_csv("../data/insurance.csv", show_col_types = FALSE)
+data <- read_csv("/home/inferinsur/insurance.csv", show_col_types = FALSE)
 
 
 #summary
 summary(data)
 ```
+
+
 ```{r}
 # Plot charges vs BMI colored by Smoking Status
 ggplot(data, aes(x = bmi, y = charges, color = smoker)) +
