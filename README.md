@@ -20,9 +20,7 @@ Prerequisites Before begin, should make sure meet the following requirements.
 
     GitHub repository.
 
-```{=html}
-<!-- -->
-```
+
 -   **Navigate to the Repository Directory**
 
     Change your current directory to the cloned repository:
